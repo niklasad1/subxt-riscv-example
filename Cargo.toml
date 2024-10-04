@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-subxt = { version = "0.37.0", default-features = false, features = ["native"] }
+subxt = { git = "https://github.com/paritytech/subxt", default-features = false, features = ["native"], branch = "na-devel-branch" }
 tokio = { version = "1.40.0", features = ["rt-multi-thread", "macros", "time"] }
 jsonrpsee-ws-client = { version = "0.24.5", default-features = false }
 jsonrpsee-core = { version = "0.24.5", features = ["client"] }
