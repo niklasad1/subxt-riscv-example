@@ -72,12 +72,17 @@ impl RpcClientT for RpcClient {
     }
 }
 
+#[subxt::subxt(runtime_metadata_path = "artifacts/metadata.scale")]
+pub mod runtime {}
+
 #[tokio::main]
 async fn main() -> Result<(), BoxError> {
     let client = RpcClient::new("ws://127.0.0.1:9944").await?;
     let subxt: OnlineClient<PolkadotConfig> = OnlineClient::from_rpc_client(client).await?;
 
-    println!("Connected to {:?}", subxt.backend().genesis_hash().await);
+    let client = jsonrpsee_ws_client::WsClientBuilder::default()
+        .build("ws://127.0.0.1:9944")
+        .await?;
 
     Ok(())
 }
